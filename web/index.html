@@ -1,0 +1,66 @@
+<html>
+	<head>  
+		<meta charset="utf-8">
+		<title>RPI-QL v2</title>
+		<!-- endinject -->
+		<link rel="shortcut icon" href="favicon.ico" />
+		<script type="text/javascript" src="js/printerAPI.js"></script>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="main">
+				<div class="header">
+					<a href="index.html"><img src="images/broher-ql-series.jpg" class="imgIcon"/></a>
+					<h1>RPI-QL v2</h1>
+				</div>
+				<div class="navigation">
+					<form id="templateForm" onsubmit="templateAPI('manageOutput');return false;">
+						<table width="100%">
+							<tr>
+								<th>Template :</th>
+								<td><select id="templatesList" onchange="changeTemplate('templateOutput')">
+									</select></td>
+									<th></th>
+									<td class="right"><a href="manage.html">Gestion</a></td>
+							</tr>
+						</table>
+					</form>
+					<script type="text/javascript">
+						loadTemplates("templatesList");
+					</script>
+				</div>
+				<div class="content">
+					<form id="templateForm" onsubmit="printerAPI('templateOutputForm');return false;">
+						<h2>Template à imprimer</h2>
+						<div id="templateOutput">Sélectionner un Template pour commencer.</div>
+						<div class="right">
+							<input id="templateFormPrint" type="submit" value="Imprimer" disabled/>
+							<input id="templateOutCopie" name="templateOutCopie" type="text" value="1" maxlength="2" size="2" class="right"/> copies
+							<div id="templateOutputForm">
+							</div>
+						</div>
+					</form>
+					<hr/>
+					<h4>Aides</h4>
+					<dl>
+						<dt>L'utilisation du Template 'cable'</dt>
+						<dd><table><tr><td><img src="images/demo-cable.jpg" style="height:96px;"></td><td valign="top">Il suffit de coller le papier, centré sur le fil, et le replier sur lui-même à fin de coller les deux bandes adhésives ensemble.</td></tr></table></dd>
+						<dt>Calcul de la dimension</dt>
+						<dd>Le calcul est fait en "mm" (millimètre). Un ration de 10px pour 1mm. Alors 580px donne 58mm, soit la taille imprimable du papier 62mm (62mm moins 3mm, du à la marge, et une marge de 1mm d'ajustement, ce qui donne 58mm).</dd>
+						<dt>La définition d'une hauteur ou largeur à 0px</dt>
+						<dd>Vu l'usage d'un papier de type infini, la valeur 0 défini l'absence de limite, ce qui est utile dans le cas des images et des bannières.</dd>
+						<dt>Limitations</dt>
+						<dd>Il n'est pas possible de modifier les paramètres tel que l'alignement, ou la direction du texte. Ceci est du à des limitation actuel du support des thèmes. 
+						Les caractères " et ' sont également non supporté correctement, veuillez plutot utiliser le caractère ` pour éviter tout problème.
+						<br/><br/>
+						Certaines limitations seront retirés dans les prochaines versions.</dd>
+						<dt>Support et Optimisation sous Windows</dt>
+						<dd>Assurez-vous d'avoir le Brother b-PAC3 d'installé (version SDK ou non). Ajusté le paramètre de l'imprimante pour arrêter après l'absence de donné. 
+						Améliorer aussi la résolution et définissez correctement le format de papier utilisé. Ceci vous évitera du gaspillage et améliora le résultat.</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

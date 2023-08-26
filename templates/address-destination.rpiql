@@ -1,0 +1,54 @@
+[paper]
+name=Address (Letter)
+desc=Print Name and address for letter send by postal service
+width=580
+height=0
+rotate=0
+
+[name]
+edit=1
+posx=0
+posy=0
+width=580
+height=100
+overflow=fit
+align=center
+type=text
+value=John Doe
+params=
+
+[address]
+edit=1
+posx=0
+posy=100
+width=580
+height=80
+overflow=fit
+align=center
+type=text
+value=1234 Street Avenue apt. 0
+params=
+
+[region]
+edit=1
+posx=0
+posy=180
+width=580
+height=80
+overflow=fit
+align=center
+type=text
+value=Ciyname, Statename
+params=
+
+[postal]
+edit=1
+posx=0
+posy=260
+width=580
+height=80
+overflow=fit
+align=center
+type=text
+value=P05T41 C0D3
+params=

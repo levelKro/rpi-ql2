@@ -1,0 +1,18 @@
+[paper]
+name=Text
+desc=Print text
+width=580
+height=0
+rotate=0
+
+[text]
+edit=1
+posx=0
+posy=0
+width=580
+height=100
+type=text
+overflow=fit
+align=center
+value=Text here
+params=

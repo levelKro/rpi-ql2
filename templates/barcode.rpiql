@@ -1,0 +1,16 @@
+[paper]
+name=Barcode
+desc=Print Barcode only
+width=580
+height=0
+rotate=0
+
+[barcode]
+edit=1
+posx=20
+posy=0
+width=540
+height=200
+type=barcode
+value=1234567890
+params=sub

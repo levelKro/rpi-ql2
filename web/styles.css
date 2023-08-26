@@ -1,0 +1,136 @@
+html, body {
+	padding:0;
+	margin:0;
+	font-family:Arial;
+	font-size:1em;
+	background:rgb(236, 251, 254);
+	color:#000;
+}
+a {
+	color:rgb(93, 220, 245);
+	text-decoration:none;
+	text-shadow:1px 1px 1px #000
+}
+a:hover {
+	color:rgb(250, 163, 50);
+	text-decoration:none;
+	text-shadow:1px 1px 1px #000
+}
+.wrap {
+	display:block;
+	padding:0;
+	margin:0;
+}
+.wrap .main {
+	width:80%;
+	min-width:640px;
+	max-width:1280px;
+	margin:10px auto;
+	padding:0;
+	display:block;
+}
+.wrap .main .header {
+	height:128px;
+	display:block;
+	padding:10px;
+	margin:0;
+}
+.wrap .main .header img.imgIcon {
+	float:right;
+	height:128px
+}
+.wrap .main .header h1 {
+	font-family:Arial;
+	font-size:64px;
+	margin:0;
+	padding:0;
+}
+.wrap .main .navigation {
+	display:block;
+	padding:10px;
+	margin:10px 0;
+	background:#fff;
+}
+.wrap .main .content {
+	display:block;
+	padding:10px;
+	margin:0;
+	background:#fff;
+}
+#updateOutput {
+	max-height:160px;
+	overflow:auto;
+}
+table th {
+	text-align:left;
+	max-width:15%;
+	width:15%;
+	padding:3px;
+}
+table td {
+	text-align:left;
+	padding:3px;
+}
+input[type="button"],
+input[type="submit"],
+button[type="button"],
+button[type="submit"] {
+	border:1px solid #000;
+	box-shadow:1px 1px 1px #000;
+	padding:6px;
+	margin:0;
+	display:inline-block;
+	line-height:1;
+	color:#000;
+	background:rgb(236, 251, 254);
+}
+input[type="button"]:disabled,
+input[type="submit"]:disabled,
+button[type="button"]:disabled,
+button[type="submit"]:disabled  {
+	color:rgb(222,213,202);
+	background:rgb(236, 251, 254);
+}
+input[type="submit"],
+button[type="submit"] {
+	font-weight:bold;
+}
+
+input[type="text"], select {
+	border:1px solid #000;
+	box-shadow:1px 1px 1px #000;
+	padding:3px;
+	margin:0;
+	display:inline-block;
+	line-height:1;
+	color:#000;
+	background:rgb(222, 213, 202);
+}
+input[type="text"] {
+	width:100%;
+}
+input#templateOutCopie {
+	width:2em;
+}
+.right {
+	text-align:right;
+}
+.left {
+	text-align:left;
+}
+.center {
+}
+img.imagesPreview {
+	height:48px;
+}
+dl {
+	font-size:0.8em;
+}
+dl dt {
+	margin:0 0 5px 0;
+	font-weight:bold;
+}
+dl dd {
+	margin:0 0 10px 0;
+	margin-inline-start:20px;
+}

@@ -1,0 +1,98 @@
+<html>
+	<head>  
+		<meta charset="utf-8">
+		<title>RPI-QL v2 - Gestion</title>
+		<!-- endinject -->
+		<link rel="shortcut icon" href="favicon.ico" />
+		<script type="text/javascript" src="js/printerAPI.js"></script>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="main">
+				<div class="header">
+					<a href="index.html"><img src="images/broher-ql-series.jpg" class="imgIcon"/></a>
+					<h1>RPI-QL v2</h1>
+				</div>
+				<div class="navigation">
+					<table width="100%">
+						<tr>
+							<th></th>
+							<td class="right"><a href="manage.html">Gestion</a></td>
+						</tr>
+					</table>
+				</div>
+				<div class="content">
+					<form id="manageForm">
+						<h2>Gestion</h2>
+						<p>Uniquement pour les systèmes basé Linux avec Python 3 et Brother-QL. 
+						Pour Windows, utiliser le Brother b-PAC3, aucune configuration requise.</p>
+						<h3>Sécurité</h3>
+						<table width="100%">
+							<tr>
+								<th>Mot de passe</th>
+								<td><input type="password" name="password" id="exampleInputPassword4" placeholder="Password"></td>
+							</tr>
+						</table>
+						<h3>Actions</h3>
+						<table width="100%">
+							<tr>
+								<th>Système</th>
+								<td>
+									<button type="button" onclick="manageAPI('manageAPI','poweroff');">Arrêter</button>
+									<button type="button" onclick="manageAPI('manageAPI','reboot');">Redémarrer</button>
+								</td>
+								<th>Mise à jour</th>
+								<td><button type="button" onclick="manageAPI('manageAPI','update');">Lancer</button></td>
+							</tr>
+							<tr>
+								<th>Log demande:</th>
+								<td><p id="manageOutput">Entrer le mot de passe avant d'effectuer une action ou modification.</p></td>
+								<th>Log MaJ:</th>
+								<td><p id="updateOutput">Pas de mise à jour en cours.</p></td>
+							</tr>
+						</table>
+					</form>
+					<form id="configForm" onsubmit="manageAPI('manageOutput','config/save');return false;">
+						<h3>Configuration</h3>
+						<table width="100%">
+							<tr>
+								<th>Modèle</th>
+								<td>
+									<select name="model" id="configModel">
+									  <option>QL-500</option>
+									  <option>QL-550</option>
+									  <option>QL-560</option>
+									  <option>QL-570</option>
+									  <option>QL-580N</option>
+									  <option>QL-650TD</option>
+									  <option>QL-700</option>
+									  <option>QL-710W</option>
+									  <option>QL-720NW</option>
+									  <option>QL-800</option>
+									  <option>QL-810W</option>
+									  <option>QL-820NWB</option>
+									  <option>QL-1050</option>
+									  <option>QL-1060N</option>
+									</select>
+								</td>
+								<th>Port USB</th>
+								<td><input name="usb" id="configUSB" type="text"/></td>
+							</tr>
+							<tr>
+								<th>Numéro de série</th>
+								<td colspan="3"><input name="serial" id="configSerial" type="text"/></td>
+							</tr>
+							<tr>
+								<td colspan="4" class="right">					
+								<button type="button" onclick="manageAPI('manageOutput','config/load');">Charger depuis le fichier de configuration</button>
+								<button type="submit" >Sauvegarder</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

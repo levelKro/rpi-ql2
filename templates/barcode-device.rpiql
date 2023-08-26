@@ -1,0 +1,52 @@
+[paper]
+name=Barcode (device)
+desc=Print barcode for identifying device
+width=580
+height=0
+rotate=0
+
+[owner]
+edit=1
+posx=0
+posy=0
+width=580
+height=60
+overflow=fit
+align=center
+type=text
+value=Propriété de
+params=
+
+[name]
+edit=1
+posx=0
+posy=60
+width=580
+height=80
+overflow=fit
+align=center
+type=text
+value=Mathieu Légaré
+params=
+
+[phone]
+edit=1
+posx=0
+posy=140
+width=580
+height=50
+overflow=fit
+align=center
+type=text
+value=555-555-5555
+params=
+
+[code]
+edit=1
+posx=20
+posy=190
+width=580
+height=160
+type=barcode
+value=1234567890
+params=sub

@@ -1,0 +1,16 @@
+[paper]
+name=Image
+desc=Print image
+width=580
+height=0
+rotate=0
+
+[image]
+edit=1
+posx=0
+posy=0
+width=580
+height=0
+type=image
+value=logo.jpg
+params=
