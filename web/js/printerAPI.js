@@ -6,7 +6,7 @@ function printerAPI(id) {
 	else{
 		copie=1;
 	}
-	var params="-f "+document.getElementById("templatesList").value+" -c "+copie+" -v '";
+	var params="-f templates/"+document.getElementById("templatesList").value+" -c "+copie+" -v '";
 	for( var i=0; i<document.getElementById("templateForm").elements.length; i++ ){
 		var fieldName = document.getElementById("templateForm").elements[i].name;
 		var fieldValue = document.getElementById("templateForm").elements[i].value;
@@ -15,27 +15,7 @@ function printerAPI(id) {
 		}
 	}	
 	params += "'";
-	/*
-	for( var i=0; i<document.getElementById("printerForm").elements.length; i++ )
-	{
-	   var fieldName = document.getElementById("printerForm").elements[i].name;
-	   var fieldValue = document.getElementById("printerForm").elements[i].value;
 
-	   params += fieldName + '=' + fieldValue + '&';
-	}	
-	if (action == "expire") {
-		ed=document.getElementById("dateoutday").value();
-		em=document.getElementById("dateoutmonth").value().split(" ")[0];
-		ey=document.getElementById("dateoutyear").value();
-		pd=document.getElementById("dateinday").value().split(" ")[0];
-		pm=document.getElementById("dateinmonth").value();
-		py=document.getElementById("dateinyear").value();
-		params+="packed="+pd+"-"+pm+"-"+py;
-		if (document.getElementById("expireVisible").checked()) {
-			params+="&expired="+ed+"-"+em+"-"+ey;
-		}
-	}
-	*/
 	if (window.XMLHttpRequest) { printerAPICall=new XMLHttpRequest(); }
 	else { printerAPICall=new ActiveXObject("Microsoft.XMLHTTP"); }
 	printerAPICall.onreadystatechange=function() {

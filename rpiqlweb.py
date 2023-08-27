@@ -286,7 +286,11 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
         strclean=str(values).replace("['","").replace("']","")
         print("Send to printer : "+strclean)
         try:
-            os.system('python3 rpiql.py'+strclean)
+            
+            if os.name == 'nt':
+                os.system('python ./rpiql.py'+strclean)
+            else:
+                os.system('python3 rpiql.py'+strclean)
         except:
             ##tmp=subprocess.Popen('python3 core.py'+str(values).replace("['","").replace("']",""), shell=True)
             print("Can't run the command.")
