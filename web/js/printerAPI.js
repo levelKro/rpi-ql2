@@ -1,7 +1,20 @@
-var id="";
-
 function printerAPI(id) {
-	var params="";
+	
+	if(document.getElementById("templateOutCopie").value>=1){
+		copie=document.getElementById("templateOutCopie").value;
+	}
+	else{
+		copie=1;
+	}
+	var params="-f "+document.getElementById("templatesList").value+" -c "+copie+" -v '";
+	for( var i=0; i<document.getElementById("templateForm").elements.length; i++ ){
+		var fieldName = document.getElementById("templateForm").elements[i].name;
+		var fieldValue = document.getElementById("templateForm").elements[i].value;
+		if(fieldName!=""){
+			params += fieldName + '="' + fieldValue + '";';
+		}
+	}	
+	params += "'";
 	/*
 	for( var i=0; i<document.getElementById("printerForm").elements.length; i++ )
 	{
@@ -39,10 +52,9 @@ function printerAPI(id) {
 	}
 	printerAPICall.open("POST","/print/cli?r="+Math.random(),true);
 	printerAPICall.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	printerAPICall.send(params);	
+	printerAPICall.send("data="+params);	
 	return false;
 }
-
 function manageAPI(id,action) {
 	var params="";
 	if (action == "config/save") {
@@ -87,31 +99,6 @@ function manageAPI(id,action) {
 	}
 	return false;
 }
-
-function updateAPI(id) {
-	var params="";
-	for( var i=0; i<document.getElementById("manageForm").elements.length; i++ )
-	{
-	   var fieldName = document.getElementById("manageForm").elements[i].name;
-	   var fieldValue = document.getElementById("manageForm").elements[i].value;
-	   params += fieldName + '=' + fieldValue + '&';
-	}	
-	if (window.XMLHttpRequest) { updateAPICall=new XMLHttpRequest(); }
-	else { updateAPICall=new ActiveXObject("Microsoft.XMLHTTP"); }
-	updateAPICall.onreadystatechange=function() {
-		if (updateAPICall.readyState==4 && updateAPICall.status==200) {
-			var result=updateAPICall.responseText;
-			document.getElementById("updateOutput").innerText=result;
-			setTimeout("updateAPI('updateOutput')",2000);
-			document.getElementById("updateOutput").scrollTop = document.getElementById("updateOutput").scrollHeight;
-		}
-	}
-	updateAPICall.open("POST","/manage/update/log?r="+Math.random(),true);
-	updateAPICall.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	updateAPICall.send(params);	
-	return false;
-}
-
 function loadImages(id) {
 	if (window.XMLHttpRequest) { loadImagesAPICall=new XMLHttpRequest(); }
 	else { loadImagesAPICall=new ActiveXObject("Microsoft.XMLHTTP"); }
@@ -171,17 +158,17 @@ function changeTemplate(id) {
 					if(value.edit=="1"){
 						out+='<table width="100%"><tr>';
 						if(value.type == "text"){
-							out+='<th rowspan="3" class="left">'+key+' (texte):</th><td rowspan="3" class="left"><input name="print['+key+'][value]" type="text" value="'+value.value+'"/>'+
+							out+='<th rowspan="3" class="left">'+key+' (texte):</th><td rowspan="3" class="left"><input name="'+key+'" type="text" value="'+value.value+'"/>'+
 							'<th class="right" width="10%">Aligment:</th><td class="left" width="10%">'+value.align+'</td>'+
 							'<th class="right" width="10%">Overflow:</th><td class="left" width="10%">'+value.overflow+'</td>';
 						}
 						else if(value.type == "image"){
-							out+='<th rowspan="3" class="left">'+key+' (texte):</th><td rowspan="3" class="left"><select id="imagesList_'+key+'" onchange="changeImage(\'imagesList_'+key+'\',\'imagesPreview_'+key+'\')"><option>Chargement...</option></select></td>'+
+							out+='<th rowspan="3" class="left">'+key+' (texte):</th><td rowspan="3" class="left"><select id="imagesList_'+key+'" name="'+key+'" onchange="changeImage(\'imagesList_'+key+'\',\'imagesPreview_'+key+'\')"><option>Chargement...</option></select></td>'+
 							'<td class="Left"><img src="" class="imagesPreview" id="imagesPreview_'+key+'"/></td>';
 							setTimeout('loadImages("imagesList_'+key+'")',1000);
 						}
 						else if(value.type == "barcode"){
-							out+='<th rowspan="3" class="left">Code :</th><td rowspan="3" class="left"><input name="print['+key+'][value]" type="text" value="'+value.value+'"/>';
+							out+='<th rowspan="3" class="left">Code :</th><td rowspan="3" class="left"><input name="'+key+'" type="text" value="'+value.value+'"/>';
 						}
 						out+='</tr><tr>';
 						if(value.params!=""){

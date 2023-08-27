@@ -2,7 +2,7 @@
 # Étiquetteuse Brother-QL
 # par Mathieu Légaré <levelkro@yahoo.ca>
 #
-# v2.23.08.19
+# v2.23.08.26
 #  ^- Version
 #    ^^- Year
 #       ^^- Month
@@ -14,8 +14,9 @@ from PIL import Image, ImageDraw, ImageFont
 import getopt, sys, os, time, datetime
 import configparser, re, shlex
 from datetime import datetime
-import win32api, win32print
 import textwrap
+if os.name == 'nt':
+    import win32api, win32print
 
 # fonction interne
 def loadConfig():
@@ -271,7 +272,7 @@ for opt, arg in opts:
         help=True
         print("*** Help for command parameters")
         print("\t-f\t<filepath>\t\tLoading draw file\r\n\t--file\t<filepath>")
-        print("\t-v\t<id=\"value\":id=\"value\">\tReplace values of id in draw file\r\n\t--value\t<id=\"value\":id=\"value\">")
+        print("\t-v\t<id=\"value\":id=\"value\">\tReplace values of id in draw file\r\n\t--value\t<id=\"value\";id=\"value\">")
         print("\t-c\t<copies>\t\tPrint number of copies of result\r\n\t--copies\t<copies>")
     elif opt == '-f' or opt == "--file":
         debug("Loading draw file " + arg)
@@ -285,7 +286,7 @@ for opt, arg in opts:
     elif opt == '-v' or opt == "--values":
         debug("Loading draw values " + arg)
         #drawValues = arg
-        items = arg.split(':')
+        items = arg.split(';')
         # Récupérer les valeurs des arguments de ligne de commande
         for item in items:
             # Vérifier si le séparateur '=' est présent dans la chaîne item

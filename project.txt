@@ -4,6 +4,6 @@ resolution
 	1mm = 10px
 
 default paper 
-	62mmx8m				= 620px x 80000px
+	62mmx8m			= 620px x 80000px
 	58mmx8m printable	= 580px x 80000px
 

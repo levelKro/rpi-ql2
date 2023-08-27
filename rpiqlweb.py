@@ -185,13 +185,13 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
                         
                 elif pathSection[2] == "cli":
                     print("CLI")
-                    if(postDatas.get('parameters') is not None):
-                        params=str(postDatas['parameters']).replace('["',"").replace('"]',"").replace("''",'"')
-                        outputJson={"result":"success","reason":"Send to cli script the parameter; "+params+"."}
+                    if(postDatas.get('data') is not None):
+                        params=str(postDatas['data']).replace('["',"").replace('"]',"").replace("''",'"')
+                        outputJson={"result":"success","reason":"Send to printer script the parameters."}
                         self.goPrint(" "+params)
                     else:
                         print("NO PARAMS")
-                        outputJson={"result":"error","reason":"No parameter to send to script."}
+                        outputJson={"result":"error","reason":"No parameter to send to printer script."}
             except:
                 outputJson={"result":"error","reason":"Error when processing the request."}
                 pass
@@ -212,57 +212,6 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
                         elif pathSection[2] == "poweroff":
                             outputJson={"result":"success","reason":"Poweroff system..."}
                             tmp=subprocess.Popen(['./cli-poweroff.sh'])
-                        elif pathSection[2] == "update":
-                            if(len(pathSection)==4):
-                                try:
-                                    if(pathSection[3]=="log"):
-                                        page="../update.log"
-                                        if path.exists(WEBPATH+page) is True:
-                                            self.path = page
-                                            try:
-                                                f = open(WEBPATH+self.path, 'rb')
-                                            except OSError:
-                                                self.send_response(404)
-                                                self.send_header("Content-type", "text/html")
-                                                self.end_headers()
-                                                self.wfile.write(bytes("Can't open log file.", "utf-8"))
-                                                return None
-
-                                            ctype = self.guess_type(self.path)
-                                            fs = os.fstat(f.fileno())
-
-                                            self.send_response(200)
-                                            self.send_header("Content-type", ctype)
-                                            self.send_header("Content-Length", str(fs[6]))
-                                            self.send_header("Last-Modified",
-                                                self.date_time_string(fs.st_mtime))
-                                            self.end_headers()            
-
-                                            try:
-                                                self.copyfile(f, self.wfile)
-                                            finally:
-                                                f.close()
-                                            ##return http.server.SimpleHTTPRequestHandler.do_GET(self)
-                                            return 
-                                        else:
-                                            self.send_response(404)
-                                            self.send_header("Content-type", "text/html")
-                                            self.end_headers()
-                                            self.wfile.write(bytes('No update running.', "utf-8"))
-                                            return None                         
-                                except:
-                                    outputJson={"result":"error","reason":"Error when processing the request."}
-                            else:
-                                outputJson={"result":"success","reason":"Updating system..."}
-                                run=False
-                                try:
-                                    if(self.update is not False):
-                                        if(self.update.returncode is None):
-                                            run=True
-                                except:
-                                    pass
-                                if(run is False):
-                                    self.update = subprocess.Popen(['./cli-update.sh'])
                         elif pathSection[2] == "config":
                             if pathSection[3] == "load":
                                 result="{"

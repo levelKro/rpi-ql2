@@ -15,7 +15,7 @@
 					<h1>RPI-QL v2</h1>
 				</div>
 				<div class="navigation">
-					<form id="templateForm" onsubmit="templateAPI('manageOutput');return false;">
+					<form id="templatesForm" onsubmit="templateAPI('manageOutput');return false;">
 						<table width="100%">
 							<tr>
 								<th>Template :</th>
@@ -36,7 +36,7 @@
 						<div id="templateOutput">Sélectionner un Template pour commencer.</div>
 						<div class="right">
 							<input id="templateFormPrint" type="submit" value="Imprimer" disabled/>
-							<input id="templateOutCopie" name="templateOutCopie" type="text" value="1" maxlength="2" size="2" class="right"/> copies
+							<input id="templateOutCopie" type="text" value="1" maxlength="2" size="2" class="right"/> copies
 							<div id="templateOutputForm">
 							</div>
 						</div>
@@ -52,7 +52,7 @@
 						<dd>Vu l'usage d'un papier de type infini, la valeur 0 défini l'absence de limite, ce qui est utile dans le cas des images et des bannières.</dd>
 						<dt>Limitations</dt>
 						<dd>Il n'est pas possible de modifier les paramètres tel que l'alignement, ou la direction du texte. Ceci est du à des limitation actuel du support des thèmes. 
-						Les caractères " et ' sont également non supporté correctement, veuillez plutot utiliser le caractère ` pour éviter tout problème.
+						Les caractères " et ' sont également non supporté correctement, veuillez plutot utiliser le caractère ` pour éviter tout problème. Le caractère ; peut aussi causer des erreurs, veuillezx le remplacer par : .
 						<br/><br/>
 						Certaines limitations seront retirés dans les prochaines versions.</dd>
 						<dt>Support et Optimisation sous Windows</dt>
