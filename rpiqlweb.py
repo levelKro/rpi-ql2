@@ -296,10 +296,10 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             print("Can't run the command.")
  
 def start():
-    pcStats = MyHttpRequestHandler
-    pcStatsServer = socketserver.TCPServer(("0.0.0.0", int(config['web']['port'])), pcStats)
+    rpiQL = MyHttpRequestHandler
+    rpiQLserver = socketserver.TCPServer(("0.0.0.0", int(config['web']['port'])), rpiQL)
     print("*** RUNNING WEB SERVER AT PORT "+str(config['web']['port'])+" ***")
-    pcStatsServer.serve_forever()
+    rpiQLserver.serve_forever()
 
             
 start()            

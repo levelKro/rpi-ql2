@@ -2,7 +2,7 @@
 # Étiquetteuse Brother-QL
 # par Mathieu Légaré <levelkro@yahoo.ca>
 #
-# v2.23.08.26
+# v2.23.09.27
 #  ^- Version
 #    ^^- Year
 #       ^^- Month
@@ -264,26 +264,30 @@ else:
     
 # application
 argv = sys.argv[1:]
-opts, args = getopt.getopt(argv,"h:f:c:v:")
+opts, args = getopt.getopt(argv,"ha:f:c:v:")
 help=False
-        
+cmd=False
 for opt, arg in opts:
     if opt == '-h':
         help=True
+        cmd=True
         print("*** Help for command parameters")
         print("\t-f\t<filepath>\t\tLoading draw file\r\n\t--file\t<filepath>")
         print("\t-v\t<id=\"value\":id=\"value\">\tReplace values of id in draw file\r\n\t--value\t<id=\"value\";id=\"value\">")
-        print("\t-c\t<copies>\t\tPrint number of copies of result\r\n\t--copies\t<copies>")
+        print("\t-c\t<copies>\t\tPrint number of copies of result\r\n\t--copies\t<copies>")        
     elif opt == '-f' or opt == "--file":
+        cmd=True
         debug("Loading draw file " + arg)
         drawFile=arg
     elif opt == '-c' or opt == "--copies":
+        cmd=True
         if(int(arg) >= 1):
             debug("Printing " + arg + " copies")
             outCopy=int(arg)
         else:
             debug("Can't set copies to " + str(arg) + ". Must be granter or equal to 1")
     elif opt == '-v' or opt == "--values":
+        cmd=True
         debug("Loading draw values " + arg)
         #drawValues = arg
         items = arg.split(';')
@@ -292,12 +296,12 @@ for opt, arg in opts:
             # Vérifier si le séparateur '=' est présent dans la chaîne item
             if '=' in item:
                 key, value = item.split('=')
-                drawValues[key] = value
+                drawValues[key] = value.replace('"','')
     else:
         #Determine parameters
         debug("Unknown parameter '"+ str(opt) + "'.")
         
-if(help is False):
+if(help is False and cmd is True):
     # Help is not diosplayed, running app
     if(drawFile):
         # Drawing from file
@@ -347,6 +351,9 @@ if(help is False):
     
     # Send to printer
     printDraw()
+
+elif(cmd is False):
+    print("Missing a valid parameter. Try '-h' for help.")
     
 # Exiting the app
 sys.exit()

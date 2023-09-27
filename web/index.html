@@ -26,9 +26,6 @@
 							</tr>
 						</table>
 					</form>
-					<script type="text/javascript">
-						loadTemplates("templatesList");
-					</script>
 				</div>
 				<div class="content">
 					<form id="templateForm" onsubmit="printerAPI('templateOutputForm');return false;">
@@ -62,5 +59,21 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript">
+			function run(){
+				loadTemplates("templatesList");
+			}
+			document.addEventListener("DOMContentLoaded", function(event) { 
+				// in case the document is already rendered
+				if (document.readyState!='loading') run();
+				// modern browsers
+				else if (document.addEventListener) 
+				document.addEventListener('DOMContentLoaded', run);
+				// IE <= 8
+				else document.attachEvent('onreadystatechange', function(){
+					if (document.readyState=='complete') run();
+				});			
+			});
+		</script>
 	</body>
 </html>
