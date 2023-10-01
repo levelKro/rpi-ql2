@@ -2,7 +2,7 @@
 # Étiquetteuse Brother-QL
 # par Mathieu Légaré <levelkro@yahoo.ca>
 #
-# v2.23.09.27
+# v2.23.08.26
 #  ^- Version
 #    ^^- Year
 #       ^^- Month
@@ -43,9 +43,12 @@ def setCut(w,h):
     w=w + 1
     h=h + 1
     if(drawBanner and w>cutCrop):
+        debug("Set cutCrop for Banner orientation")
         cutCrop=w
     elif(h>=cutCrop):
+        debug("Set cutCrop for normal orientation")
         cutCrop=h
+    debug("Cut Crop is now "+str(cutCrop))
         
 def getValue(value):
     global drawValues
@@ -54,16 +57,16 @@ def getValue(value):
 def saveDraw():
     global config,outFile,outDraw,outImage,cutCrop
     debug("Save the draw")
-    if(drawBanner):
-        debug("Is a banner, rotating output")
-        outImage=outImage.rotate(90, expand=True)
     if(cutCrop>0):
-        debug("Draw is over, cutting for "+str(drawWidth)+"x"+str(cutCrop))
-        
         if(drawRules['paper']['width']=="0"):
+            debug("Draw is over, cutting for "+str(cutCrop)+"x"+str(drawHeight))
             outImage=outImage.crop((0, 0, cutCrop, drawHeight))
         elif(drawRules['paper']['height']=="0"):
+            debug("Draw is over, cutting for "+str(drawWidth)+"x"+str(cutCrop))
             outImage=outImage.crop((0, 0, drawWidth, cutCrop))
+    if(drawBanner):
+        debug("Is a banner, rotating output")
+        outImage=outImage.rotate(270, expand=True)
     outImage.save(outFile, format='PNG')
             
 def printDraw():
@@ -106,9 +109,9 @@ def textDraw(text,posx,posy,width,height,align,overflow):
             testFontSize=height
             while(testFontSize >= 0 and fontSize is False):
                 testFont = ImageFont.truetype(config['default']['font'], testFontSize)
-                if(testFont.getbbox(text)[3] <= height and testFont.getbbox(text)[2]<=width):
+                if(testFont.getbbox(text)[3]<=height and (testFont.getbbox(text)[2]<=width or width==0)):
                     # Text is lower of the height of space
-                    if((testFont.getbbox(text)[3] == height or testFont.getbbox(text)[2] >= (height - 2))):
+                    if((testFont.getbbox(text)[3] >= (height - 2))):
                         debug("Font size found")
                         # Text is same of above the limit of height
                         # Font size found
@@ -119,16 +122,17 @@ def textDraw(text,posx,posy,width,height,align,overflow):
                         lastFontSize=testFontSize
                         testFontSize=testFontSize + 1
                 else:
-                    # Heigh or with Overflow
+                    # Height or width Overflow
                     if(lastFontSize):
                         debug("Use last font size found")
                         # Previous check is good, the new overflow, use the last good result
                         # Font size found
                         fontSize=lastFontSize
                     else:
-                        debug("Try a smaller fon size")
+                        debug("Try a smaller font size")
                         # Size overflow, test a smaller size
                         testFontSize=testFontSize - 1
+                debug("Tested font size result: "+str(testFont.getbbox(text)[2])+"x"+str(testFont.getbbox(text)[3]))
         elif(overflow=="wrap"):
             debug("Try to wrap text")
             # Text do not overflow, adding return for paragraph text

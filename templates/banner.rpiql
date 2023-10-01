@@ -3,14 +3,14 @@ name=Text (Banner)
 desc=Print text banner
 width=0
 height=580
-rotate=0
+rotate=1
 
 [text]
 edit=1
 posx=0
 posy=0
-width=580
-height=100
+width=0
+height=580
 type=text
 overflow=fit
 align=left
