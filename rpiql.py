@@ -29,7 +29,10 @@ def loadDraw():
     drawRules = configparser.ConfigParser()
     drawRules.read(drawFile, encoding='utf-8')
 
+treepoem=False
+
 def loadBarcode():
+    global barcode, treepoem
     if(barcode is False):
         barcode=True
         import treepoem
