@@ -2,7 +2,7 @@
 # Étiquetteuse Brother-QL
 # par Mathieu Légaré <levelkro@yahoo.ca>
 #
-# v2.23.10.01
+# v2.23.12.17
 #  ^- Version
 #    ^^- Year
 #       ^^- Month
